@@ -1,0 +1,7 @@
+C:\Users\evgen\source\repos\AsteroidGame\AsteroidGame\bin\Debug\AsteroidGame.exe.config
+C:\Users\evgen\source\repos\AsteroidGame\AsteroidGame\bin\Debug\AsteroidGame.exe
+C:\Users\evgen\source\repos\AsteroidGame\AsteroidGame\bin\Debug\AsteroidGame.pdb
+C:\Users\evgen\source\repos\AsteroidGame\AsteroidGame\obj\Debug\AsteroidGame.csprojAssemblyReference.cache
+C:\Users\evgen\source\repos\AsteroidGame\AsteroidGame\obj\Debug\AsteroidGame.csproj.CoreCompileInputs.cache
+C:\Users\evgen\source\repos\AsteroidGame\AsteroidGame\obj\Debug\AsteroidGame.exe
+C:\Users\evgen\source\repos\AsteroidGame\AsteroidGame\obj\Debug\AsteroidGame.pdb
