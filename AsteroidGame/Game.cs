@@ -53,12 +53,15 @@ namespace AsteroidGame
         {
             //Проверяем вывод графики
             Buffer.Graphics.Clear(Color.Black);
-            Buffer.Graphics.DrawRectangle(Pens.White, new Rectangle(100, 100, 200, 200));
-            Buffer.Graphics.FillEllipse(Brushes.Wheat, new Rectangle(100, 100, 200, 200));
-            Buffer.Render();
+            //Buffer.Graphics.DrawRectangle(Pens.White, new Rectangle(100, 100, 200, 200));
+            //Buffer.Graphics.FillEllipse(Brushes.Wheat, new Rectangle(100, 100, 200, 200));
+            //Buffer.Render();
 
             foreach (BaseObject obj in _objs)
                 obj.Draw();
+            foreach (Asteroid obj in _asteroids)
+                obj.Draw();
+            _bullet.Draw();
             Buffer.Render();
         }
 
@@ -66,14 +69,56 @@ namespace AsteroidGame
         {
             foreach (BaseObject obj in _objs)
                 obj.Update();
+            foreach (Asteroid a in _asteroids)
+            {
+                a.Update();
+                if (a.Collision(_bullet)) 
+                {
+                    System.Media.SystemSounds.Hand.Play();
+                }
+            }
+            _bullet.Update();
         }
 
-        public static BaseObject[] _objs;
+        private static BaseObject[] _objs;
+        private static Bullet _bullet;
+        private static Asteroid[] _asteroids;
+
+        static int GetRandomStartPosX()
+        {
+            return r.Next(Game.Width, Game.Width * 2);
+        }
+        static int GetRandomStartPosY()
+        {
+            return r.Next(0, Game.Height);
+        }
+
+        static Random r = new Random();
+
         public static void Load()
         {
-            _objs = new BaseObject[30];
-            for (int i = 0; i < _objs.Length; i++)
-                _objs[i] = new BaseObject(new Point(600, i * 20), new Point(15 - i, 15 - i), new Size(20, 20));
+            _objs = new BaseObject[55];
+            _bullet = new Bullet(new Point(0, 200), new Point(5, 0), new Size(4, 1));
+            _asteroids = new Asteroid[40];
+
+            for (int i = 0; i < 55; i++)
+                _objs[i] = new Star(new Point(GetRandomStartPosX(), GetRandomStartPosY()), new Point(i, 0), new Size(2, 2));
+
+            for (int i = 0; i < 40; i++)
+                _asteroids[i] = new Asteroid(new Point(GetRandomStartPosX(), GetRandomStartPosY()), new Point(i, 0), new Size(30, 20));
+
+            //var rnd = new Random();
+            //for (var i = 0; i < _objs.Length; i++)
+            //{
+            //    int r = rnd.Next(5, 50);
+            //    _objs[i] = new Star(new Point(1000, rnd.Next(0, Game.Height)), new Point(-r, r), new Size(3, 3));
+            //}
+            //for (var i = 0; i < _asteroids.Length; i++)
+            //{
+            //    int r = rnd.Next(5, 50);
+            //    _asteroids[i] = new Asteroid(new Point(100, rnd.Next(0, Game.Height)), new Point(-r / 5, r), new Size(r, r));
+            //}
+
         }
 
     }
